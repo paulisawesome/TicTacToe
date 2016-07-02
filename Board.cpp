@@ -139,7 +139,7 @@ void Board::print() {
 }
 
 bool Board::setSquare(int row, int col, char val) {
-	if(row < dimLen && col < dimLen ) {
+	if(row >= 0 && row < dimLen && col >= 0 && col < dimLen ) {
 		return squares[row][col].setValue(val);
 	}
 	return false;
