@@ -28,73 +28,86 @@ Board::~Board() {
 	delete [] squares;
 }
 
-char Board::isVictory() {
+char Board::victor() {
 	int row;
 	int col;
-	char win;
+	char victor;
 
-	/* Check the rows for a winner */
+	/* Check the rows for a victorner */
 	for(row = 0; row < dimLen; row++) {
-		win = squares[row][0].getValue();
+		victor = squares[row][0].getValue();
 
-		if(win != SQUARE_EMPTY) {
+		if(victor != SQUARE_EMPTY) {
 			for(col = 1; col < dimLen; col++) {
-				if(win != squares[row][col].getValue()) {
+				if(victor != squares[row][col].getValue()) {
 					/* Non-consecutive value */
 					break;
 				}
 			}
 
 			if(col == dimLen) {
-				return win;
+				return victor;
 			}
 		}
 	}
 
-	/* Check the cols for a winner */
+	/* Check the cols for a victorner */
 	for(col = 0; col < dimLen; col++) {
-		win = squares[0][col].getValue();
+		victor = squares[0][col].getValue();
 
-		if(win != SQUARE_EMPTY) {
+		if(victor != SQUARE_EMPTY) {
 			for(row = 1; row < dimLen; row++) {
-				if(win != squares[row][col].getValue()) {
+				if(victor != squares[row][col].getValue()) {
 					/* Non-consecutive value */
 					break;
 				}
 			}
 
 			if(row == dimLen) {
-				return win;
+				return victor;
 			}
 		}
 	}
 
-	/* Check the decending diagonal */
-	win = squares[0][0].getValue();
-	if(win != SQUARE_EMPTY) {
+	/* Check the descending diagonal */
+	victor = squares[0][0].getValue();
+	if(victor != SQUARE_EMPTY) {
 		for(row = 1; row < dimLen; row++) {
-			if(win != squares[row][row].getValue()) {
-				win = SQUARE_EMPTY;
+			if(victor != squares[row][row].getValue()) {
+				break;
 			}
 		}
 
 		if(row == dimLen) {
-			return win;
+			return victor;
 		}
 	}
 
 	/* Check the ascending diagonal */
-	win = squares[0][dimLen - 1].getValue();
-	if(win != SQUARE_EMPTY) {
+	victor = squares[0][dimLen - 1].getValue();
+	if(victor != SQUARE_EMPTY) {
 		for(row = 1; row < dimLen; row++) {
-			if(win != squares[row][dimLen - row - 1].getValue()) {
-				win = SQUARE_EMPTY;
+			if(victor != squares[row][dimLen - row - 1].getValue()) {
+				break;
 			}
 		}
 
 		if(row == dimLen) {
-			return win;
+			return victor;
 		}
+	}
+
+	/* Check for stalemate */
+	bool stalemate = true;
+	for(row = 0; row < dimLen && stalemate; row++) {
+		for(col = 0; col < dimLen && stalemate; col++) {
+			if(squares[row][col].getValue() == SQUARE_EMPTY) {
+				stalemate = false;
+			}
+		}
+	}
+	if(stalemate){
+		return BOARD_STALEMATE;
 	}
 
 	return SQUARE_EMPTY;
@@ -125,10 +138,11 @@ void Board::print() {
 	}
 }
 
-void Board::setSquare(int row, int col, char val) {
+bool Board::setSquare(int row, int col, char val) {
 	if(row < dimLen && col < dimLen ) {
-		squares[row][col].setValue(val);
+		return squares[row][col].setValue(val);
 	}
+	return false;
 }
 
 

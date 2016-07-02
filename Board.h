@@ -12,6 +12,8 @@
 
 namespace TickTackToe {
 
+#define BOARD_STALEMATE '-'
+
 class Board {
 private:
 	int dimLen;
@@ -21,9 +23,9 @@ public:
 	Board();
 	virtual ~Board();
 
-	char isVictory();
+	char victor();
 	void print();
-	void setSquare(int row, int col, char val);
+	bool setSquare(int row, int col, char val);
 	void reset();
 };
 

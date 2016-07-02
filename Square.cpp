@@ -22,14 +22,20 @@ char Square::getValue() const {
 	return this->value;
 }
 
-void Square::setValue(const char value) {
+bool Square::setValue(const char value) {
+	bool ret = false;
+
 	if(this->value == SQUARE_EMPTY) {
 		if(value == 'x' || value == 'X') {
 			this->value = SQUARE_X;
+			ret = true;
 		} else if( value == 'y' || value == 'Y' ) {
 			this->value = SQUARE_Y;
+			ret = true;
 		}
 	}
+
+	return ret;
 }
 
 void Square::reset() {

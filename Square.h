@@ -14,7 +14,6 @@ namespace TickTackToe {
 #define SQUARE_X		'X'
 #define SQUARE_Y		'Y'
 
-
 class Square {
 	char value;
 
@@ -23,7 +22,7 @@ public:
 	virtual ~Square();
 
 	char getValue() const;
-	void setValue(const char);
+	bool setValue(const char);
 	void reset();
 };
 
