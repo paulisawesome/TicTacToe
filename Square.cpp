@@ -10,7 +10,7 @@
 namespace TickTackToe {
 
 Square::Square() {
-	this->value = ' ';
+	this->value = SQUARE_EMPTY;
 
 }
 
@@ -18,18 +18,22 @@ Square::~Square() {
 	// TODO Auto-generated destructor stub
 }
 
-char Square::GetValue() const {
+char Square::getValue() const {
 	return this->value;
 }
 
-void Square::SetValue(const char value) {
-	if(this->value == ' ') {
+void Square::setValue(const char value) {
+	if(this->value == SQUARE_EMPTY) {
 		if(value == 'x' || value == 'X') {
-			this->value = 'X';
+			this->value = SQUARE_X;
 		} else if( value == 'y' || value == 'Y' ) {
-			this->value = 'Y';
+			this->value = SQUARE_Y;
 		}
 	}
+}
+
+void Square::reset() {
+	this->value = SQUARE_EMPTY;
 }
 
 } /* namespace TickTackToe */

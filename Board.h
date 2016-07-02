@@ -14,15 +14,17 @@ namespace TickTackToe {
 
 class Board {
 private:
-	int rows;
-	int cols;
+	int dimLen;
 	Square **squares;
 
 public:
 	Board();
 	virtual ~Board();
 
+	char isVictory();
 	void print();
+	void setSquare(int row, int col, char val);
+	void reset();
 };
 
 } /* namespace TickTackToe */
