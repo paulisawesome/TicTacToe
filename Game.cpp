@@ -38,12 +38,9 @@ void Game::run() {
 			getline(cin, move);
 			istringstream iss(move);
 
-			string rowStr;
-			iss >> rowStr;
-			int row = stringToNumber(rowStr);
-			string colStr;
-			iss >> colStr;
-			int col = stringToNumber(colStr);
+			int row = getNumber(iss);
+			int col = getNumber(iss);
+			cout << "Hello " << row << " " << col << endl;
 
 			valid = board.setSquare(row, col, currentPlayer);
 			if(!valid) {
@@ -72,10 +69,9 @@ void Game::run() {
 }
 
 
-int Game::stringToNumber(const string &str) {
-	stringstream ss(str);
+int Game::getNumber(istringstream &iss) {
 	int result;
-	return ss >> result ? result : -1;
+	return (iss >> result) ? result : -1;
 }
 
 } /* namespace TickTackToe */

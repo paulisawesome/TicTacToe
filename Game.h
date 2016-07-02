@@ -8,7 +8,7 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include <string>
+#include <sstream>
 #include "Board.h"
 
 namespace TickTackToe {
@@ -17,7 +17,7 @@ class Game {
 	Board board;
 	char currentPlayer;
 
-	int stringToNumber(const std::string &str);
+	int getNumber(std::istringstream &iss);
 
 public:
 	Game();
