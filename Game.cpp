@@ -8,6 +8,8 @@
 #include <sstream>
 #include <string>
 
+#include "AIPlayer.h"
+#include "Board.h"
 #include "Game.h"
 #include "Square.h"
 
@@ -26,6 +28,7 @@ Game::~Game() {
 void Game::run() {
 	char victor;
 	bool valid;
+	AIPlayer ai(SQUARE_Y);
 
 	board.print();
 
@@ -34,13 +37,22 @@ void Game::run() {
 		do {
 			cout << currentPlayer << ": ";
 
-			string move;
-			getline(cin, move);
-			istringstream iss(move);
+			int row = -1;
+			int col = -1;
 
-			int row = getNumber(iss);
-			int col = getNumber(iss);
-			cout << "Hello " << row << " " << col << endl;
+			if(SQUARE_X == currentPlayer) {
+				string move;
+				getline(cin, move);
+				istringstream iss(move);
+
+				row = getNumber(iss);
+				col = getNumber(iss);
+			} else { /* AI Player */
+				Move move = ai.getMove(&board);
+				row = move.row;
+				col = move.col;
+				cout << row << " " << col << endl;
+			}
 
 			valid = board.setSquare(row, col, currentPlayer);
 			if(!valid) {

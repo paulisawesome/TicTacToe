@@ -18,6 +18,13 @@ Square::~Square() {
 	// TODO Auto-generated destructor stub
 }
 
+Square Square::operator=(const Square &b) {
+	if(this != &b) {
+		this->value = b.value;
+	}
+	return *this;
+}
+
 char Square::getValue() const {
 	return this->value;
 }

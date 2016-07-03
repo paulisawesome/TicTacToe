@@ -21,6 +21,8 @@ public:
 	Square();
 	virtual ~Square();
 
+	Square operator=(const Square &b);
+
 	char getValue() const;
 	bool setValue(const char);
 	void reset();
