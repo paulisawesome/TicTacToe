@@ -52,22 +52,13 @@ Board * Board::getSuccessor(Move move) {
 
 int Board::evaluateScore(char player) {
 	char victor = this->victor();
-	char other;
 
-	if(player == SQUARE_X) {
-		other = SQUARE_Y;
+	if(SQUARE_Y == victor) {
+		return 1;
+	} else if(SQUARE_X == victor) {
+		return -1;
 	} else {
-		other = SQUARE_X;
-	}
-
-	if(player == victor) {
-		return 1000;
-	} else if(other == victor) {
-		return -1000;
-	} else if(BOARD_STALEMATE == victor) {
-		return -100;
-	} else {
-		return 0; // This is goint to make the AI play the first available spot always
+		return 0;
 	}
 }
 

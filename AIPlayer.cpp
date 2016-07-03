@@ -15,6 +15,8 @@
 
 namespace TicTacToe {
 
+#define OTHER_PLAYER( player ) (player == SQUARE_X) ? SQUARE_Y : SQUARE_X
+
 AIPlayer::AIPlayer() {
 	player = SQUARE_Y;
 
@@ -29,34 +31,29 @@ AIPlayer::~AIPlayer() {
 }
 
 Move AIPlayer::getMove(Board *board) {
-	return getValue(board, this->player, INT_MIN, INT_MAX);
+	return getValue(board, OTHER_PLAYER(this->player) );
 }
 
-Move AIPlayer::getValue(Board *board, char player, int alpha, int beta) {
+Move AIPlayer::getValue(Board *board, char player) {
 	/* Check for victory or stalemate */
 	char victor = board->victor();
-	std::cout << "getValue() victor:" << victor << std::endl;
 	if( victor != SQUARE_EMPTY ) {
 		/* Evaluate score */
 		return Move(board->evaluateScore(player), player);
 	}
 
 	/* Get the next agent */
-	if( SQUARE_X == player ) {
-		player = SQUARE_Y;
-	} else {
-		player = SQUARE_X;
-	}
+	player = OTHER_PLAYER(player);
 
 	/* If this is the AI player try to max */
 	if(this->player == player) {
-		return maxValue(board, player, alpha, beta);
+		return maxValue(board, player);
 	} else {
-		return minValue(board, player, alpha, beta);
+		return minValue(board, player);
 	}
 }
 
-Move AIPlayer::maxValue(Board *board, char player, int alpha, int beta) {
+Move AIPlayer::maxValue(Board *board, char player) {
 	Move move(INT_MIN, player);
 	std::list<Move> moves;
 
@@ -64,18 +61,11 @@ Move AIPlayer::maxValue(Board *board, char player, int alpha, int beta) {
 
 	while(!moves.empty()) {
 		Board * successor = board->getSuccessor(moves.front());
-		Move nmove = getValue(successor, player, alpha, beta);
+		Move nmove = getValue(successor, player);
 
 		if(nmove.score > move.score) {
 			move = moves.front();
 			move.score = nmove.score;
-		}
-		if( move.score > beta ) {
-			return move;
-		}
-		if( move.score > alpha ) {
-			alpha = move.score;
-			std::cout << "alpha:" << alpha << std::endl;
 		}
 
 		moves.pop_front();
@@ -84,7 +74,7 @@ Move AIPlayer::maxValue(Board *board, char player, int alpha, int beta) {
 	return move;
 }
 
-Move AIPlayer::minValue(Board *board, char player, int alpha, int beta) {
+Move AIPlayer::minValue(Board *board, char player) {
 	Move move(INT_MAX, player);
 	std::list<Move> moves;
 
@@ -92,18 +82,11 @@ Move AIPlayer::minValue(Board *board, char player, int alpha, int beta) {
 
 	while(!moves.empty()) {
 		Board * successor = board->getSuccessor(moves.front());
-		Move nmove = getValue(successor, player, alpha, beta);
+		Move nmove = getValue(successor, player);
 
 		if(nmove.score < move.score) {
 			move = moves.front();
 			move.score = nmove.score;
-		}
-		if( move.score < alpha ) {
-			return move;
-		}
-		if( move.score < beta ) {
-			beta = move.score;
-			std::cout << "beta:" << beta << std::endl;
 		}
 
 		moves.pop_front();

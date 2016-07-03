@@ -15,9 +15,9 @@ namespace TicTacToe {
 class AIPlayer {
 	char player;
 
-	Move getValue(Board *board, char player, int alpha, int beta);
-	Move maxValue(Board *board, char player, int alpha, int beta);
-	Move minValue(Board *board, char player, int alpha, int beta);
+	Move getValue(Board *board, char player);
+	Move maxValue(Board *board, char player);
+	Move minValue(Board *board, char player);
 
 public:
 	AIPlayer();
