@@ -7,7 +7,7 @@
 
 #include "Square.h"
 
-namespace TickTackToe {
+namespace TicTacToe {
 
 Square::Square() {
 	this->value = SQUARE_EMPTY;

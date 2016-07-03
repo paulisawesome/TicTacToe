@@ -11,7 +11,7 @@
 #include <sstream>
 #include "Board.h"
 
-namespace TickTackToe {
+namespace TicTacToe {
 
 class Game {
 	Board board;

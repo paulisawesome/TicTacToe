@@ -10,7 +10,7 @@
 
 #include "Board.h"
 
-namespace TickTackToe {
+namespace TicTacToe {
 
 class AIPlayer {
 	char player;

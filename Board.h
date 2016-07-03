@@ -11,7 +11,7 @@
 #include <list>
 #include "Square.h"
 
-namespace TickTackToe {
+namespace TicTacToe {
 
 #define BOARD_STALEMATE '-'
 #define DIMLEN 3

@@ -1,6 +1,6 @@
-# TickTackToe
+# TicTacToe
 
-A command line Tick Tack Toe game in C++.
+A command line Tic Tac Toe game in C++.
 
 ## Why??
 

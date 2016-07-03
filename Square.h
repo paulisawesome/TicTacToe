@@ -8,7 +8,7 @@
 #ifndef SQUARE_H_
 #define SQUARE_H_
 
-namespace TickTackToe {
+namespace TicTacToe {
 
 #define SQUARE_EMPTY    ' '
 #define SQUARE_X		'X'

@@ -13,7 +13,7 @@
 #include "AIPlayer.h"
 #include "Board.h"
 
-namespace TickTackToe {
+namespace TicTacToe {
 
 AIPlayer::AIPlayer() {
 	player = SQUARE_Y;

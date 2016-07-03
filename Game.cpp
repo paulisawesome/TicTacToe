@@ -15,7 +15,7 @@
 
 using namespace std;
 
-namespace TickTackToe {
+namespace TicTacToe {
 
 Game::Game() {
 	currentPlayer = SQUARE_X;

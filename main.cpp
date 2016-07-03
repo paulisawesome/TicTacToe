@@ -2,7 +2,7 @@
 #include "Board.h"
 #include "Game.h"
 
-using namespace TickTackToe;
+using namespace TicTacToe;
 
 static void boardTest() {
 	Board board;

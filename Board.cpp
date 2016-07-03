@@ -10,7 +10,7 @@
 
 using namespace std;
 
-namespace TickTackToe {
+namespace TicTacToe {
 
 Board::Board() {
 }
